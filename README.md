@@ -33,7 +33,7 @@ The system is specifically designed to catch "trap documents" containing intenti
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/factcheck-ai.git
+git clone https://github.com/prashantanalyst/factcheck-ai.git
 cd factcheck-ai
 ```
 
