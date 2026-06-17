@@ -21,8 +21,8 @@ The system is specifically designed to catch "trap documents" containing intenti
 | Layer | Technology |
 |---|---|
 | Frontend | Streamlit |
-| AI model | Claude Sonnet 4.6 (claude-sonnet-4-6) |
-| Web search | Anthropic `web_search_20250305` tool (native) |
+| AI model | Groq |
+| Web search | Groq tool (native) |
 | PDF handling | Base64 document API (no external library needed) |
 | Deployment | Streamlit Cloud |
 
@@ -43,12 +43,12 @@ cd factcheck-ai
 pip install -r requirements.txt
 ```
 
-### 3. Add your Anthropic API key
+### 3. Add your Groq API
 
 For local development, create `.streamlit/secrets.toml`:
 
 ```toml
-ANTHROPIC_API_KEY = "sk-ant-..."
+GROQ_API_KEY = "gsk_abc123xyz..."
 ```
 
 For Streamlit Cloud deployment, add the key in **Settings → Secrets**.
@@ -64,18 +64,18 @@ streamlit run app.py
 1. Push this repo to GitHub
 2. Go to [share.streamlit.io](https://share.streamlit.io)
 3. Connect your repo
-4. Set `ANTHROPIC_API_KEY` in the Secrets section
+4. Set `GROQ_API_KEY` in the Secrets section
 5. Deploy — your app will be live at `https://YOUR_APP.streamlit.app`
 
 ---
 
 ## How the Verification Works
 
-**Claim Extraction (Claude + PDF):**
+**Claim Extraction (Groq + PDF):**
 Claude reads the full PDF as a base64-encoded document and returns a structured JSON list of verifiable claims. It prioritizes concrete, checkable facts over vague statements.
 
-**Verification (Claude + Web Search):**
-For each claim, Claude uses the `web_search_20250305` tool to search for current, authoritative data, then compares the claim to what it finds. The model applies these rules:
+**Verification (Groq + Web Search):**
+For each claim, gorq uses the `web_search_20250305` tool to search for current, authoritative data, then compares the claim to what it finds. The model applies these rules:
 - **Verified** — current web data confirms the claim is accurate
 - **Inaccurate** — current web data contradicts the claim (wrong number, outdated stat, false assertion)
 - **Unverifiable** — no reliable sources found to confirm or deny
